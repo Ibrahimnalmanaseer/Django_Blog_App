@@ -1,11 +1,51 @@
 {% extends '_base.html' %}
+
 {% load static %}
 
 {% block title %}Home page{% endblock title %}
 
 {% block content %}
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <img src="{% static 'images/logo.png' %}" class="img-fluid" alt="DjangoX logo"/>
-  <p class="lead">A Django starter project with batteries.</p>
-</div>
+
+
+<header class="masthead" style="background-image: url('https://cdn.searchenginejournal.com/wp-content/uploads/2020/08/7-ways-a-blog-can-help-your-business-right-now-5f3c06b9eb24e.png')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>Blog</h1>
+          <span class="subheading">A collection of Blogs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      {% for post in object_list %}
+      <div class="post-preview">
+        <a href="{% url 'blog_detail' pk=post.id %}">
+          <h2 class="post-title">
+            {{post.title}}
+          </h2>
+        
+        </a>
+        <p class="post-meta">Posted by
+          <a href="#">{{post.author}}</a>
+          on {{post.date}}
+          <a href="{% url 'delete'  id=post.id %}">✘</a>
+        </p>
+      </div>
+      <hr>
+      {% endfor %}
+
+
+      <div class="clearfix">
+
+        <a class="btn btn-primary float-right" href="{%url 'blog_create'%}">Create New Blog</a>
+      </div>
+      
 {% endblock content %}
